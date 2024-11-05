@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .name {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 200px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .attended {
+            background-color: #28a745; /* Green */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Attendance List</h1>
+    <div id="names">
+        <div class="name" onclick="toggleAttendance(this)">Alice</div>
+        <div class="name" onclick="toggleAttendance(this)">Bob</div>
+        <div class="name" onclick="toggleAttendance(this)">Charlie</div>
+        <div class="name" onclick="toggleAttendance(this)">David</div>
+        <div class="name" onclick="toggleAttendance(this)">Eva</div>
+        <div class="name" onclick="toggleAttendance(this)">Frank</div>
+        <div class="name" onclick="toggleAttendance(this)">Grace</div>
+        <div class="name" onclick="toggleAttendance(this)">Hannah</div>
+        <div class="name" onclick="toggleAttendance(this)">Ian</div>
+        <div class="name" onclick="toggleAttendance(this)">Julia</div>
+    </div>
+
+    <script>
+        function toggleAttendance(element) {
+            element.classList.toggle('attended');
+        }
+    </script>
+</body>
+</html>
+
