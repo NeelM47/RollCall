@@ -3,54 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance</title>
+    <title>Roll Call Attendance</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-
-        .name {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #007BFF;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 200px;
             text-align: center;
-            transition: background-color 0.3s;
         }
-
-        .attended {
-            background-color: #28a745; /* Green */
-            color: white;
+        .name {
+            font-size: 24px;
+            margin: 10px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .name:hover {
+            color: blue;
         }
     </style>
 </head>
 <body>
-    <h1>Attendance List</h1>
-    <div id="names">
-        <div class="name" onclick="toggleAttendance(this)">Alice</div>
-        <div class="name" onclick="toggleAttendance(this)">Bob</div>
-        <div class="name" onclick="toggleAttendance(this)">Charlie</div>
-        <div class="name" onclick="toggleAttendance(this)">David</div>
-        <div class="name" onclick="toggleAttendance(this)">Eva</div>
-        <div class="name" onclick="toggleAttendance(this)">Frank</div>
-        <div class="name" onclick="toggleAttendance(this)">Grace</div>
-        <div class="name" onclick="toggleAttendance(this)">Hannah</div>
-        <div class="name" onclick="toggleAttendance(this)">Ian</div>
-        <div class="name" onclick="toggleAttendance(this)">Julia</div>
-    </div>
+    <h1>Student Roll Call</h1>
+    <div id="names-container"></div>
 
     <script>
-        function toggleAttendance(element) {
-            element.classList.toggle('attended');
+        const names = ["Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hannah", "Ivy", "Jack"];
+        const container = document.getElementById("names-container");
+
+        // Function to display names
+        function displayNames() {
+            container.innerHTML = ''; // Clear previous names
+            names.forEach(name => {
+                const nameElement = document.createElement("div");
+                nameElement.className = "name";
+                nameElement.textContent = name;
+                nameElement.onclick = () => markAttendance(name);
+                container.appendChild(nameElement);
+            });
         }
+
+        // Function to mark attendance
+        function markAttendance(name) {
+            fetch('http://192.168.0.52:3000/data', {  // Update with your server URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: name, attended: true })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert(`${name} has been marked as attended.`);
+                } else {
+                    alert('Error marking attendance.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Display names on page load
+        displayNames();
     </script>
 </body>
 </html>

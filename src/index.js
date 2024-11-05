@@ -34,17 +34,13 @@ app.post('/data', async (req, res) => {
 	});
 	try{
 		await newData.save();
-		console.log('Data saved successfully:', newData);
+		console.log('Data saved successfully:', JSON.stringify(newData, null, 2));
 		res.send('Data saved successfully');
 	} catch (error) {
 		console.error('Error saving data:', error);
 		res.status(500).send('Error saving data');
 	}
 });
-
-//app.get('/', (req, res) => {
-//    res.send('Hello, World!');
-//});
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
