@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost:27017/mydatabase', {
 
 const DataSchema = new mongoose.Schema({
 	name: String,
-	value: String
+	day: String
 });
 
 const Data = mongoose.model('Data', DataSchema);
@@ -30,7 +30,7 @@ app.get('/data', async (req, res) => {
 app.post('/data', async (req, res) => {
 	const newData = new Data({ 
 		name: req.body.name,
-		value: req.body.value
+		day: req.body.day
 	});
 	try{
 		await newData.save();

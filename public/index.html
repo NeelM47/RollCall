@@ -25,29 +25,36 @@
     <div id="names-container"></div>
 
     <script>
-        const names = ["Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hannah", "Ivy", "Jack"];
-        const container = document.getElementById("names-container");
-
-        // Function to display names
+		const container = document.getElementById("names-container");
+        // Function to load names from JSON and display them
         function displayNames() {
-            container.innerHTML = ''; // Clear previous names
-            names.forEach(name => {
-                const nameElement = document.createElement("div");
-                nameElement.className = "name";
-                nameElement.textContent = name;
-                nameElement.onclick = () => markAttendance(name);
-                container.appendChild(nameElement);
-            });
-        }
+            fetch('names.json')
+                .then(response => response.json())
+                .then(data => {
+                    container.innerHTML = '';
+                    data.forEach(person => {
+                        const nameElement = document.createElement("div");
+                        nameElement.className = "name";
+                        nameElement.textContent = person.name;
+                        nameElement.onclick = () => markAttendance(person.name);
+                        container.appendChild(nameElement);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading names:", error);
+                });
+         }
 
         // Function to mark attendance
         function markAttendance(name) {
+			const day = new Date().toISOString();
+
             fetch('http://192.168.0.52:3000/data', {  // Update with your server URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name: name, attended: true })
+                body: JSON.stringify({ name: name, day: day.toString() , attended: true })
             })
             .then(response => {
                 if (response.ok) {
