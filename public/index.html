@@ -47,8 +47,12 @@
 
         // Function to mark attendance
         function markAttendance(name) {
-			const day = new Date().toISOString();
-
+			// Remove this code
+			const isoday = new Date();
+			isoday.setDate(isoday.getDate() + 5);
+			const day = isoday.toISOString();
+			// Keep the line below
+			//const day = new Date().toISOString();
             fetch('http://192.168.0.52:3000/data', {  // Update with your server URL
                 method: 'POST',
                 headers: {

@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# Start the Node.js server in the background
-#node src/index.js &
-
-# Capture the process ID (PID) of the Node.js server so we can stop it later
-#SERVER_PID=$!
-
-# wait a moment for the server to initialize (optional)
-#sleep 5
-
-# now you can proceed with the next commands, even while the server is running
-
 echo "Is environment running ???"
 
 echo "Starting server ..."
