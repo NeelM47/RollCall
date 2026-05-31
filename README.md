@@ -16,9 +16,4 @@ Using cutting-edge Computer Vision and Facial Recognition, **RollCall** detects,
 * **Data Management:** Pandas, SQLite / CSV
 * **UI/Web (If applicable):** Streamlit / Tkinter / Flask
 
-## 🚀 How to Run
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/NeelM47/RollCall.git
-   cd RollCall
